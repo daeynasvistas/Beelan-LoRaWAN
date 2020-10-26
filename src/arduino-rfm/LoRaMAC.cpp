@@ -269,6 +269,10 @@ void LORA_Receive_Data(sBuffer *Data_Rx, sLoRa_Session *Session_Data, sLoRa_OTAA
 	unsigned char Data_Location;
 
 	message_t Message_Status = NO_MESSAGE;
+	
+	#if defined(ESP8266) || defined(ESP32) 
+	yield();
+	#endif	
 
 	//If it is a type A device switch RFM to single receive
 	if(LoRa_Settings->Mote_Class == CLASS_A)
